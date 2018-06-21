@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Sulu\Bundle\ExampleEventBundle\Tests\Unit\Model\Command;
+namespace Sulu\Bundle\ExampleEventBundle\Tests\Unit\Model\Handler;
 
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\ExampleEventBundle\Model\Command\RemoveEventCommand;

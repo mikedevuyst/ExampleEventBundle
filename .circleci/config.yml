@@ -42,4 +42,5 @@ jobs:
       - run: Tests/app/console sulu:document:initialize
 
       - run: vendor/bin/phpunit
+      - run: vendor/bin/phpstan analyze -c phpstan.neon . --level 7
       - run: vendor/bin/php-cs-fixer fix --verbose --diff --dry-run

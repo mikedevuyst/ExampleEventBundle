@@ -29,12 +29,12 @@ class Event
     private $description = '';
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $startDate;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      */
     private $endDate;
 
