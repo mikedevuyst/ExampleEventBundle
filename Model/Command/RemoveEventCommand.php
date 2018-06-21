@@ -9,9 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-$file = __DIR__ . '/../vendor/autoload.php';
-if (!file_exists($file)) {
-    throw new RuntimeException('Install dependencies to run test suite.');
-}
+namespace Sulu\Bundle\ExampleEventBundle\Model\Command;
 
-return require $file;
+class RemoveEventCommand
+{
+    use EventIdTrait;
+
+    public function __construct(string $id)
+    {
+        $this->initializeId($id);
+    }
+}
