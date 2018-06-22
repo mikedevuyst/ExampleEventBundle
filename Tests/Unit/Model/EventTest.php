@@ -13,23 +13,21 @@ namespace Sulu\Bundle\ExampleEventBundle\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\ExampleEventBundle\Model\Event;
-use Sulu\Bundle\ExampleEventBundle\Model\EventId;
 
 class EventTest extends TestCase
 {
-    public function testGetEventId()
+    public function testGetId()
     {
-        $eventId = $this->prophesize(EventId::class);
-        $event = new Event($eventId->reveal());
+        $event = new Event('123-123-123');
 
-        $this->assertEquals($eventId->reveal(), $event->getEventId());
+        $this->assertEquals('123-123-123', $event->getId());
     }
 
-    public function testGetEventIdWithGeneration()
+    public function testGetIdWithGeneration()
     {
         $event = new Event();
 
-        $this->assertInstanceOf(EventId::class, $event->getEventId());
+        $this->assertTrue(is_string($event->getId()));
     }
 
     public function testGetTitle()

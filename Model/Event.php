@@ -11,10 +11,16 @@
 
 namespace Sulu\Bundle\ExampleEventBundle\Model;
 
-class Event
+use Ramsey\Uuid\Uuid;
+use Sulu\Component\Persistence\Model\AuditableInterface;
+use Sulu\Component\Persistence\Model\AuditableTrait;
+
+class Event implements AuditableInterface
 {
+    use AuditableTrait;
+
     /**
-     * @var EventId
+     * @var string
      */
     private $id;
 
@@ -38,12 +44,12 @@ class Event
      */
     private $endDate;
 
-    public function __construct(?EventId $id = null)
+    public function __construct(?string $id = null)
     {
-        $this->id = $id ?: new EventId();
+        $this->id = $id ?: Uuid::uuid4()->toString();
     }
 
-    public function getEventId(): EventId
+    public function getId(): string
     {
         return $this->id;
     }

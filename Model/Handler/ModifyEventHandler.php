@@ -29,7 +29,7 @@ class ModifyEventHandler
 
     public function handle(ModifyEventCommand $command): Event
     {
-        $event = $this->eventRepository->findById($command->getEventId());
+        $event = $this->eventRepository->findById($command->getId());
         $event
             ->setTitle($command->getTitle())
             ->setDescription($command->getDescription())

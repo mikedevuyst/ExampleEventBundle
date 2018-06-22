@@ -11,14 +11,20 @@
 
 namespace Sulu\Bundle\ExampleEventBundle\Model\Query;
 
-use Sulu\Bundle\ExampleEventBundle\Model\Command\EventIdTrait;
-
 class FindEventQuery
 {
-    use EventIdTrait;
+    /**
+     * @var string
+     */
+    private $id;
 
     public function __construct(string $id)
     {
-        $this->initializeId($id);
+        $this->id = $id;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 }

@@ -13,16 +13,14 @@ namespace Sulu\Bundle\ExampleEventBundle\Tests\Unit\Model\Command;
 
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\ExampleEventBundle\Model\Command\ModifyEventCommand;
-use Sulu\Bundle\ExampleEventBundle\Model\EventId;
 
 class ModifyEventCommandTest extends TestCase
 {
-    public function testGetEventId()
+    public function testGetId()
     {
         $command = new ModifyEventCommand('123-123-123', ['title' => 'Sulu']);
 
-        $this->assertInstanceOf(EventId::class, $command->getEventId());
-        $this->assertEquals('123-123-123', $command->getEventId()->getId());
+        $this->assertEquals('123-123-123', $command->getId());
     }
 
     public function testGetTitle()

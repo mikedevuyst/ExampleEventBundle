@@ -13,13 +13,23 @@ namespace Sulu\Bundle\ExampleEventBundle\Model\Command;
 
 class ModifyEventCommand
 {
-    use EventIdTrait;
     use PayloadTrait;
+
+    /**
+     * @var string
+     */
+    private $id;
 
     public function __construct(string $id, array $payload)
     {
-        $this->initializeId($id);
         $this->initializePayload($payload);
+
+        $this->id = $id;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getTitle(): string
