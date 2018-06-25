@@ -25,6 +25,29 @@ class EventControllerTest extends SuluTestCase
         $this->purgeDatabase();
     }
 
+    public function testCGet()
+    {
+        $event = $this->createEvent();
+        $event->setStartDate(new \DateTime('2018-01-01'));
+        $event->setEndDate(new \DateTime('2018-12-31'));
+
+        $client = $this->createAuthenticatedClient();
+        $client->request(
+            'GET',
+            '/api/events'
+        );
+
+        $result = json_decode($client->getResponse()->getContent(), true);
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+
+        $events = $result['_embedded']['events'];
+
+        $this->assertCount(1, $events);
+        $this->assertEquals(1, $result['total']);
+
+        $this->assertEquals($event->getTitle(), $events[0]['title']);
+    }
+
     public function testGet()
     {
         $event = $this->createEvent();
