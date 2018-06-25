@@ -13,32 +13,70 @@ namespace Sulu\Bundle\ExampleEventBundle\Model\Command;
 
 class ModifyEventCommand
 {
-    use EventIdTrait;
-    use PayloadTrait;
+    /**
+     * @var string
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     */
+    private $endDate;
 
     public function __construct(string $id, array $payload)
     {
-        $this->initializeId($id);
-        $this->initializePayload($payload);
+        $this->id = $id;
+
+        $this->title = $payload['title'];
+
+        $this->description = $payload['description'];
+
+        if (array_key_exists('startDate', $payload)) {
+            $this->startDate = new \DateTime($payload['startDate']);
+        }
+
+        if (array_key_exists('endDate', $payload)) {
+            $this->endDate = new \DateTime($payload['endDate']);
+        }
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getTitle(): string
     {
-        return $this->getStringValue('title');
+        return $this->title;
     }
 
     public function getDescription(): string
     {
-        return $this->getStringValue('description');
+        return $this->description;
     }
 
     public function getStartDate(): ?\DateTime
     {
-        return $this->getDateTimeValueWithDefault('startDate', null);
+        return $this->startDate;
     }
 
     public function getEndDate(): ?\DateTime
     {
-        return $this->getDateTimeValueWithDefault('endDate', null);
+        return $this->endDate;
     }
 }

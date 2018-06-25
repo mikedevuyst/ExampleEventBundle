@@ -18,33 +18,59 @@ class CreateEventCommandTest extends TestCase
 {
     public function testGetTitle()
     {
-        $command = new CreateEventCommand(['title' => 'Sulu']);
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
         $this->assertEquals('Sulu', $command->getTitle());
     }
 
     public function testGetDescription()
     {
-        $command = new CreateEventCommand(['description' => 'Sulu is awesome']);
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
         $this->assertEquals('Sulu is awesome', $command->getDescription());
     }
 
     public function testGetStartDate()
     {
-        $startDate = $this->prophesize(\DateTime::class);
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
-        $command = new CreateEventCommand(['startDate' => $startDate->reveal()]);
-
-        $this->assertEquals($startDate->reveal(), $command->getStartDate());
+        $this->assertInstanceOf(\DateTime::class, $command->getStartDate());
+        $this->assertEquals(new \DateTime('2018-01-01'), $command->getStartDate());
     }
 
     public function testGetEndDate()
     {
-        $endDate = $this->prophesize(\DateTime::class);
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
-        $command = new CreateEventCommand(['endDate' => $endDate->reveal()]);
-
-        $this->assertEquals($endDate->reveal(), $command->getEndDate());
+        $this->assertInstanceOf(\DateTime::class, $command->getEndDate());
+        $this->assertEquals(new \DateTime('2018-12-31'), $command->getEndDate());
     }
 }

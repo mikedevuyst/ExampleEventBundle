@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sulu_example_event.controller.event"
+                 class="Sulu\Bundle\ExampleEventBundle\Controller\EventController">
+            <argument type="service" id="sulu_example_event.commandbus"/>
+            <argument type="service" id="fos_rest.view_handler.default"/>
+        </service>
+
+        <service id="sulu_example_event.repository.event"
+                 class="Sulu\Bundle\ExampleEventBundle\Repository\EventRepository">
+            <factory service="doctrine.orm.entity_manager" method="getRepository"/>
+
+            <argument type="string">Sulu\Bundle\ExampleEventBundle\Model\Event</argument>
+        </service>
+    </services>
+</container>
+

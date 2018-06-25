@@ -15,12 +15,12 @@ use Sulu\Bundle\ExampleEventBundle\Model\Exception\EventNotFoundException;
 
 interface EventRepositoryInterface
 {
-    public function create(?EventId $id = null): Event;
+    public function create(?string $id = null): Event;
 
     /**
      * @throws EventNotFoundException
      */
-    public function findById(EventId $id): Event;
+    public function findById(string $id): Event;
 
     public function remove(Event $event): void;
 }

@@ -29,7 +29,7 @@ class RemoveEventHandler
 
     public function handle(RemoveEventCommand $command): Event
     {
-        $event = $this->eventRepository->findById($command->getEventId());
+        $event = $this->eventRepository->findById($command->getId());
         $this->eventRepository->remove($event);
 
         return $event;

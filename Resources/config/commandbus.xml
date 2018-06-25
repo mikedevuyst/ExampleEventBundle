@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sulu_example_event.commandbus" class="League\Tactician\CommandBus">
+            <argument type="collection">
+                <argument type="service" id="sulu_example_event.commandbus.transaction_middleware"/>
+                <argument type="service" id="sulu_example_event.commandbus.handler_middleware"/>
+            </argument>
+        </service>
+
+        <service id="sulu_example_event.commandbus.name_extractor"
+                 class="League\Tactician\Handler\CommandNameExtractor\ClassNameExtractor"/>
+        <service id="League\Tactician\Handler\MethodNameInflector\HandleInflector"/>
+        <service id="sulu_example_event.commandbus.handler_locator"
+                 class="League\Tactician\Handler\Locator\InMemoryLocator">
+            <argument type="collection">
+                <argument
+                        key="Sulu\Bundle\ExampleEventBundle\Model\Command\CreateEventCommand"
+                        type="service"
+                        id="sulu_example_event.handler.create_event"
+                />
+                <argument
+                        key="Sulu\Bundle\ExampleEventBundle\Model\Command\ModifyEventCommand"
+                        type="service"
+                        id="sulu_example_event.handler.modify_event"
+                />
+                <argument
+                        key="Sulu\Bundle\ExampleEventBundle\Model\Command\RemoveEventCommand"
+                        type="service"
+                        id="sulu_example_event.handler.remove_event"
+                />
+                <argument
+                        key="Sulu\Bundle\ExampleEventBundle\Model\Query\FindEventQuery"
+                        type="service"
+                        id="sulu_example_event.handler.find_event"
+                />
+            </argument>
+        </service>
+
+        <service id="sulu_example_event.commandbus.handler_middleware"
+                 class="League\Tactician\Handler\CommandHandlerMiddleware">
+            <argument type="service" id="sulu_example_event.commandbus.name_extractor"/>
+            <argument type="service" id="sulu_example_event.commandbus.handler_locator"/>
+            <argument type="service" id="League\Tactician\Handler\MethodNameInflector\HandleInflector"/>
+        </service>
+
+        <service id="sulu_example_event.commandbus.transaction_middleware"
+                 class="League\Tactician\Doctrine\ORM\TransactionMiddleware">
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+    </services>
+</container>
+

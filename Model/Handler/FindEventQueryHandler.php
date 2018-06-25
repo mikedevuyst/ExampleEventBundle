@@ -29,6 +29,6 @@ class FindEventQueryHandler
 
     public function handle(FindEventQuery $command): Event
     {
-        return $this->eventRepository->findById($command->getEventId());
+        return $this->eventRepository->findById($command->getId());
     }
 }

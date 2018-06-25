@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+    <entity name="Sulu\Bundle\ExampleEventBundle\Model\Event" table="ex_events" repository-class="Sulu\Bundle\ExampleEventBundle\Repository\EventRepository">
+        <id name="id" type="guid">
+            <generator strategy="NONE"/>
+        </id>
+
+        <field name="title" type="string"/>
+        <field name="description" type="text"/>
+        <field name="startDate" type="datetime" nullable="true"/>
+        <field name="endDate" type="datetime" nullable="true"/>
+    </entity>
+</doctrine-mapping>

@@ -13,28 +13,26 @@ namespace Sulu\Bundle\ExampleEventBundle\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\ExampleEventBundle\Model\Event;
-use Sulu\Bundle\ExampleEventBundle\Model\EventId;
 
 class EventTest extends TestCase
 {
-    public function testGetEventId()
+    public function testGetId()
     {
-        $eventId = $this->prophesize(EventId::class);
-        $event = new Event($eventId->reveal());
+        $event = new Event('123-123-123');
 
-        $this->assertEquals($eventId->reveal(), $event->getEventId());
+        $this->assertEquals('123-123-123', $event->getId());
     }
 
-    public function testGetEventIdWithGeneration()
+    public function testGetIdWithGeneration()
     {
-        $event = new Event();
+        $event = new Event('123-123-123');
 
-        $this->assertInstanceOf(EventId::class, $event->getEventId());
+        $this->assertTrue(is_string($event->getId()));
     }
 
     public function testGetTitle()
     {
-        $event = new Event();
+        $event = new Event('123-123-123');
         $event->setTitle('Sulu');
 
         $this->assertEquals('Sulu', $event->getTitle());
@@ -42,7 +40,7 @@ class EventTest extends TestCase
 
     public function testGetDescription()
     {
-        $event = new Event();
+        $event = new Event('123-123-123');
         $event->setDescription('Sulu is awesome');
 
         $this->assertEquals('Sulu is awesome', $event->getDescription());
@@ -52,7 +50,7 @@ class EventTest extends TestCase
     {
         $startDate = $this->prophesize(\DateTime::class);
 
-        $event = new Event();
+        $event = new Event('123-123-123');
         $event->setStartDate($startDate->reveal());
 
         $this->assertEquals($startDate->reveal(), $event->getStartDate());
@@ -62,7 +60,7 @@ class EventTest extends TestCase
     {
         $endDate = $this->prophesize(\DateTime::class);
 
-        $event = new Event();
+        $event = new Event('123-123-123');
         $event->setEndDate($endDate->reveal());
 
         $this->assertEquals($endDate->reveal(), $event->getEndDate());

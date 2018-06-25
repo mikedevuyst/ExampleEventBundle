@@ -13,47 +13,85 @@ namespace Sulu\Bundle\ExampleEventBundle\Tests\Unit\Model\Command;
 
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\ExampleEventBundle\Model\Command\ModifyEventCommand;
-use Sulu\Bundle\ExampleEventBundle\Model\EventId;
 
 class ModifyEventCommandTest extends TestCase
 {
-    public function testGetEventId()
+    public function testGetId()
     {
-        $command = new ModifyEventCommand('123-123-123', ['title' => 'Sulu']);
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
-        $this->assertInstanceOf(EventId::class, $command->getEventId());
-        $this->assertEquals('123-123-123', $command->getEventId()->getId());
+        $this->assertEquals('123-123-123', $command->getId());
     }
 
     public function testGetTitle()
     {
-        $command = new ModifyEventCommand('123-123-123', ['title' => 'Sulu']);
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
         $this->assertEquals('Sulu', $command->getTitle());
     }
 
     public function testGetDescription()
     {
-        $command = new ModifyEventCommand('123-123-123', ['description' => 'Sulu is awesome']);
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
         $this->assertEquals('Sulu is awesome', $command->getDescription());
     }
 
     public function testGetStartDate()
     {
-        $startDate = $this->prophesize(\DateTime::class);
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
-        $command = new ModifyEventCommand('123-123-123', ['startDate' => $startDate->reveal()]);
-
-        $this->assertEquals($startDate->reveal(), $command->getStartDate());
+        $this->assertInstanceOf(\DateTime::class, $command->getStartDate());
+        $this->assertNotNull($command->getStartDate());
+        $this->assertEquals(new \DateTime('2018-01-01'), $command->getStartDate());
     }
 
     public function testGetEndDate()
     {
-        $endDate = $this->prophesize(\DateTime::class);
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
+            ]
+        );
 
-        $command = new ModifyEventCommand('123-123-123', ['endDate' => $endDate->reveal()]);
-
-        $this->assertEquals($endDate->reveal(), $command->getEndDate());
+        $this->assertInstanceOf(\DateTime::class, $command->getEndDate());
+        $this->assertNotNull($command->getEndDate());
+        $this->assertEquals(new \DateTime('2018-12-31'), $command->getEndDate());
     }
 }
