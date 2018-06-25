@@ -18,14 +18,34 @@ class CreateEventCommandTest extends TestCase
 {
     public function testGetTitle()
     {
-        $command = new CreateEventCommand(['title' => 'Sulu']);
+        $startDate = $this->prophesize(\DateTime::class);
+        $endDate = $this->prophesize(\DateTime::class);
+
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals('Sulu', $command->getTitle());
     }
 
     public function testGetDescription()
     {
-        $command = new CreateEventCommand(['description' => 'Sulu is awesome']);
+        $startDate = $this->prophesize(\DateTime::class);
+        $endDate = $this->prophesize(\DateTime::class);
+
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals('Sulu is awesome', $command->getDescription());
     }
@@ -33,17 +53,33 @@ class CreateEventCommandTest extends TestCase
     public function testGetStartDate()
     {
         $startDate = $this->prophesize(\DateTime::class);
+        $endDate = $this->prophesize(\DateTime::class);
 
-        $command = new CreateEventCommand(['startDate' => $startDate->reveal()]);
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals($startDate->reveal(), $command->getStartDate());
     }
 
     public function testGetEndDate()
     {
+        $startDate = $this->prophesize(\DateTime::class);
         $endDate = $this->prophesize(\DateTime::class);
 
-        $command = new CreateEventCommand(['endDate' => $endDate->reveal()]);
+        $command = new CreateEventCommand(
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals($endDate->reveal(), $command->getEndDate());
     }

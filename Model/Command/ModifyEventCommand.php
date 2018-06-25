@@ -11,20 +11,56 @@
 
 namespace Sulu\Bundle\ExampleEventBundle\Model\Command;
 
+use Webmozart\Assert\Assert;
+
 class ModifyEventCommand
 {
-    use PayloadTrait;
-
     /**
      * @var string
      */
     private $id;
 
+    /**
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @var string
+     */
+    private $description;
+
+    /**
+     * @var \DateTime
+     */
+    private $startDate;
+
+    /**
+     * @var \DateTime
+     */
+    private $endDate;
+
     public function __construct(string $id, array $payload)
     {
-        $this->initializePayload($payload);
-
         $this->id = $id;
+
+        Assert::keyExists($payload, 'title');
+        Assert::string($payload['title']);
+        $this->title = $payload['title'];
+
+        Assert::keyExists($payload, 'description');
+        Assert::string($payload['description']);
+        $this->description = $payload['description'];
+
+        if (array_key_exists('startDate', $payload)) {
+            Assert::isInstanceOf($payload['startDate'], \DateTime::class);
+            $this->startDate = $payload['startDate'];
+        }
+
+        if (array_key_exists('startDate', $payload)) {
+            Assert::isInstanceOf($payload['endDate'], \DateTime::class);
+            $this->endDate = $payload['endDate'];
+        }
     }
 
     public function getId(): string
@@ -34,21 +70,21 @@ class ModifyEventCommand
 
     public function getTitle(): string
     {
-        return $this->getStringValue('title');
+        return $this->title;
     }
 
     public function getDescription(): string
     {
-        return $this->getStringValue('description');
+        return $this->description;
     }
 
     public function getStartDate(): ?\DateTime
     {
-        return $this->getDateTimeValueWithDefault('startDate', null);
+        return $this->startDate;
     }
 
     public function getEndDate(): ?\DateTime
     {
-        return $this->getDateTimeValueWithDefault('endDate', null);
+        return $this->endDate;
     }
 }

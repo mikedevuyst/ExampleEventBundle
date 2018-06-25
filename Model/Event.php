@@ -11,7 +11,6 @@
 
 namespace Sulu\Bundle\ExampleEventBundle\Model;
 
-use Ramsey\Uuid\Uuid;
 use Sulu\Component\Persistence\Model\AuditableInterface;
 use Sulu\Component\Persistence\Model\AuditableTrait;
 
@@ -44,9 +43,9 @@ class Event implements AuditableInterface
      */
     private $endDate;
 
-    public function __construct(?string $id = null)
+    public function __construct(string $id)
     {
-        $this->id = $id ?: Uuid::uuid4()->toString();
+        $this->id = $id;
     }
 
     public function getId(): string

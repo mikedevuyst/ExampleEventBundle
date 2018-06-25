@@ -18,21 +18,54 @@ class ModifyEventCommandTest extends TestCase
 {
     public function testGetId()
     {
-        $command = new ModifyEventCommand('123-123-123', ['title' => 'Sulu']);
+        $startDate = $this->prophesize(\DateTime::class);
+        $endDate = $this->prophesize(\DateTime::class);
+
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals('123-123-123', $command->getId());
     }
 
     public function testGetTitle()
     {
-        $command = new ModifyEventCommand('123-123-123', ['title' => 'Sulu']);
+        $startDate = $this->prophesize(\DateTime::class);
+        $endDate = $this->prophesize(\DateTime::class);
+
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals('Sulu', $command->getTitle());
     }
 
     public function testGetDescription()
     {
-        $command = new ModifyEventCommand('123-123-123', ['description' => 'Sulu is awesome']);
+        $startDate = $this->prophesize(\DateTime::class);
+        $endDate = $this->prophesize(\DateTime::class);
+
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals('Sulu is awesome', $command->getDescription());
     }
@@ -40,17 +73,35 @@ class ModifyEventCommandTest extends TestCase
     public function testGetStartDate()
     {
         $startDate = $this->prophesize(\DateTime::class);
+        $endDate = $this->prophesize(\DateTime::class);
 
-        $command = new ModifyEventCommand('123-123-123', ['startDate' => $startDate->reveal()]);
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals($startDate->reveal(), $command->getStartDate());
     }
 
     public function testGetEndDate()
     {
+        $startDate = $this->prophesize(\DateTime::class);
         $endDate = $this->prophesize(\DateTime::class);
 
-        $command = new ModifyEventCommand('123-123-123', ['endDate' => $endDate->reveal()]);
+        $command = new ModifyEventCommand(
+            '123-123-123',
+            [
+                'title' => 'Sulu',
+                'description' => 'Sulu is awesome',
+                'startDate' => $startDate->reveal(),
+                'endDate' => $endDate->reveal(),
+            ]
+        );
 
         $this->assertEquals($endDate->reveal(), $command->getEndDate());
     }

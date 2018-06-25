@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\ExampleEventBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\ExampleEventBundle\Model\Event;
 use Sulu\Bundle\ExampleEventBundle\Model\EventRepositoryInterface;
 use Sulu\Bundle\ExampleEventBundle\Model\Exception\EventNotFoundException;
@@ -22,7 +23,7 @@ class EventRepository extends EntityRepository implements EventRepositoryInterfa
     {
         $className = $this->getClassName();
 
-        $event = new $className();
+        $event = new $className($id ?: Uuid::uuid4()->toString());
         $this->getEntityManager()->persist($event);
 
         return $event;
