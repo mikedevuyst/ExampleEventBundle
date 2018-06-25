@@ -28,6 +28,9 @@ class EventControllerTest extends SuluTestCase
     public function testGet()
     {
         $event = $this->createEvent();
+        $event->setStartDate(new \DateTime('2018-01-01'));
+        $event->setEndDate(new \DateTime('2018-12-31'));
+        $this->getEntityManager()->flush();
 
         $client = $this->createAuthenticatedClient();
         $client->request(
@@ -42,6 +45,8 @@ class EventControllerTest extends SuluTestCase
         $this->assertEquals($event->getId(), $result['id']);
         $this->assertEquals('Sulu', $result['title']);
         $this->assertEquals('Sulu is awesome', $result['description']);
+        $this->assertEquals('2018-01-01', $result['startDate']);
+        $this->assertEquals('2018-12-31', $result['endDate']);
     }
 
     public function testPost()
@@ -53,6 +58,8 @@ class EventControllerTest extends SuluTestCase
             [
                 'title' => 'Sulu',
                 'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
             ]
         );
 
@@ -63,6 +70,8 @@ class EventControllerTest extends SuluTestCase
         $this->assertArrayHasKey('id', $result);
         $this->assertEquals('Sulu', $result['title']);
         $this->assertEquals('Sulu is awesome', $result['description']);
+        $this->assertEquals('2018-01-01', $result['startDate']);
+        $this->assertEquals('2018-12-31', $result['endDate']);
     }
 
     public function testPut()
@@ -76,6 +85,8 @@ class EventControllerTest extends SuluTestCase
             [
                 'title' => 'Sulu',
                 'description' => 'Sulu is awesome',
+                'startDate' => '2018-01-01',
+                'endDate' => '2018-12-31',
             ]
         );
 
@@ -86,6 +97,8 @@ class EventControllerTest extends SuluTestCase
         $this->assertEquals($event->getId(), $result['id']);
         $this->assertEquals('Sulu', $result['title']);
         $this->assertEquals('Sulu is awesome', $result['description']);
+        $this->assertEquals('2018-01-01', $result['startDate']);
+        $this->assertEquals('2018-12-31', $result['endDate']);
     }
 
     public function testDelete()
