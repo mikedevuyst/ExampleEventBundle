@@ -1,5 +1,6 @@
 {
     "example_event.events": "Events",
+    "example_event.event": "Veranstaltung",
     "example_event.title": "Title",
     "example_event.start-date": "Start",
     "example_event.end-date": "End",
