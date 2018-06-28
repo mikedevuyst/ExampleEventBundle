@@ -94,7 +94,7 @@ class ExampleEventExtension extends Extension implements PrependExtensionInterfa
             [
                 'resources' => [
                     'events' => [
-                        'form' => [],
+                        'form' => ['@ExampleEventBundle/Resources/config/forms/Event.xml'],
                         'datagrid' => Event::class,
                         'endpoint' => 'sulu_example_event.get_events',
                     ],

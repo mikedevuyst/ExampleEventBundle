@@ -6,5 +6,6 @@
     "example_event.created": "Erstellt am",
     "example_event.creator": "Erstellt von",
     "example_event.changed": "Bearbeitet am",
-    "example_event.changer": "Bearbeitet von"
+    "example_event.changer": "Bearbeitet von",
+    "example_event.details": "Details"
 }
