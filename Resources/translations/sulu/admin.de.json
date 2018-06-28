@@ -1,0 +1,10 @@
+{
+    "example_event.events": "Veranstaltungen",
+    "example_event.title": "Titel",
+    "example_event.start-date": "Start",
+    "example_event.end-date": "Ende",
+    "example_event.created": "Erstellt am",
+    "example_event.creator": "Erstellt von",
+    "example_event.changed": "Bearbeitet am",
+    "example_event.changer": "Bearbeitet von"
+}

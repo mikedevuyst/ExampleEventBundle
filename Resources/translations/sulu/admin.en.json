@@ -1,0 +1,10 @@
+{
+    "example_event.events": "Events",
+    "example_event.title": "Title",
+    "example_event.start-date": "Start",
+    "example_event.end-date": "End",
+    "example_event.created": "Created at",
+    "example_event.creator": "Created by",
+    "example_event.changed": "Changed at",
+    "example_event.changer": "Changed by"
+}
