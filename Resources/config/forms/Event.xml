@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<properties xmlns="http://schemas.sulu.io/template/template"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/properties-1.0.xsd">
+    <property name="title" type="text_line">
+        <meta>
+            <title lang="de">Titel</title>
+            <title lang="en">Title</title>
+        </meta>
+    </property>
+    <property name="description" type="text_area">
+        <meta>
+            <title lang="de">Beschreibung</title>
+            <title lang="en">Description</title>
+        </meta>
+    </property>
+    <property name="startDate" type="date" colspan="6">
+        <meta>
+            <title lang="de">Start</title>
+            <title lang="en">Start</title>
+        </meta>
+    </property>
+    <property name="endDate" type="date" colspan="6">
+        <meta>
+            <title lang="de">Ende</title>
+            <title lang="en">End</title>
+        </meta>
+    </property>
+</properties>

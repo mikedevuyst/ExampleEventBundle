@@ -11,6 +11,8 @@
 
 namespace Sulu\Bundle\ExampleEventBundle\DependencyInjection;
 
+use Sulu\Bundle\ExampleEventBundle\Model\Event;
+use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -69,6 +71,53 @@ class ExampleEventExtension extends Extension implements PrependExtensionInterfa
                                 ],
                             ],
                         ],
+                    ],
+                ],
+            ]
+        );
+
+        $this->prependAdmin($container);
+    }
+
+    private function prependAdmin(ContainerBuilder $container)
+    {
+        if (SuluKernel::CONTEXT_ADMIN !== $container->getParameter('sulu.context')) {
+            return;
+        }
+
+        if (!$container->hasExtension('sulu_admin')) {
+            throw new \RuntimeException('Missing SuluAdminBundle.');
+        }
+
+        $container->prependExtensionConfig(
+            'sulu_admin',
+            [
+                'field_type_options' => [
+                    'selection' => [
+                        'event_selection' => [
+                            'adapter' => 'table',
+                            'displayProperties' => ['title', 'startDate', 'endDate'],
+                            'icon' => 'su-plus',
+                            'label' => 'example_event.event',
+                            'resourceKey' => 'events',
+                            'overlayTitle' => 'example_event.events',
+                        ],
+                    ],
+                    'single_selection' => [
+                        'single_event_selection' => [
+                            'auto_complete' => [
+                                'displayProperty' => 'title',
+                                'searchProperties' => ['title'],
+                                'resourceKey' => 'events',
+                            ],
+                        ],
+                    ],
+                ],
+                'resources' => [
+                    'events' => [
+                        'form' => ['@ExampleEventBundle/Resources/config/forms/Event.xml'],
+                        'datagrid' => Event::class,
+                        'endpoint' => 'sulu_example_event.get_events',
                     ],
                 ],
             ]
