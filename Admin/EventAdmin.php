@@ -38,6 +38,11 @@ class EventAdmin extends Admin
 
     public function getRoutes(): array
     {
+        $formToolbarActions = [
+            'sulu_admin.save',
+            'sulu_admin.delete',
+        ];
+
         return [
             (new Route('example_event.event_datagrid', '/events', 'sulu_admin.datagrid'))
                 ->addOption('title', 'example_event.events')
@@ -46,6 +51,7 @@ class EventAdmin extends Admin
                 ->addOption('addRoute', 'example_event.event_add_form.detail')
                 ->addOption('editRoute', 'example_event.event_edit_form.detail'),
             (new Route('example_event.event_add_form', '/events/add', 'sulu_admin.resource_tabs'))
+                ->addOption('toolbarActions', $formToolbarActions)
                 ->addOption('resourceKey', 'events'),
             (new Route('example_event.event_add_form.detail', '/details', 'sulu_admin.form'))
                 ->addOption('tabTitle', 'example_event.details')
@@ -53,6 +59,7 @@ class EventAdmin extends Admin
                 ->addOption('editRoute', 'example_event.event_edit_form.detail')
                 ->setParent('example_event.event_add_form'),
             (new Route('example_event.event_edit_form', '/events/:id', 'sulu_admin.resource_tabs'))
+                ->addOption('toolbarActions', $formToolbarActions)
                 ->addOption('resourceKey', 'events'),
             (new Route('example_event.event_edit_form.detail', '/details', 'sulu_admin.form'))
                 ->addOption('tabTitle', 'example_event.details')

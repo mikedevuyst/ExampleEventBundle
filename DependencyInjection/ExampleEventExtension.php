@@ -95,20 +95,28 @@ class ExampleEventExtension extends Extension implements PrependExtensionInterfa
                 'field_type_options' => [
                     'selection' => [
                         'event_selection' => [
-                            'adapter' => 'table',
-                            'displayProperties' => ['title', 'startDate', 'endDate'],
-                            'icon' => 'su-plus',
-                            'label' => 'example_event.event',
-                            'resourceKey' => 'events',
-                            'overlayTitle' => 'example_event.events',
+                            'default_type' => 'overlay',
+                            'resource_key' => 'events',
+                            'types' => [
+                                'overlay' => [
+                                    'adapter' => 'table',
+                                    'display_properties' => ['title', 'startDate', 'endDate'],
+                                    'icon' => 'su-plus',
+                                    'label' => 'example_event.event',
+                                    'overlay_title' => 'example_event.events',
+                                ],
+                            ],
                         ],
                     ],
                     'single_selection' => [
                         'single_event_selection' => [
-                            'auto_complete' => [
-                                'displayProperty' => 'title',
-                                'searchProperties' => ['title'],
-                                'resourceKey' => 'events',
+                            'default_type' => 'auto_complete',
+                            'resource_key' => 'events',
+                            'types' => [
+                                'auto_complete' => [
+                                    'display_property' => 'title',
+                                    'search_properties' => ['title'],
+                                ],
                             ],
                         ],
                     ],
